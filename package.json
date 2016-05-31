@@ -1,0 +1,24 @@
+{
+  "name": "node-beauty",
+  "version": "1.0.0",
+  "description": "Beauty service framework",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdwong/node-beauty.git"
+  },
+  "dependencies": {
+    "restify": "*",
+    "lodash": "*"
+  },
+  "keywords": [
+    "restful",
+    "service"
+  ],
+  "author": "Bun Wong <bunwong@qq.com>",
+  "homepage": "http://beauty.hdwong.com",
+  "bugs": {
+    "url": "https://github.com/hdwong/node-beauty/issues"
+  },
+  "license": "MIT"
+}
