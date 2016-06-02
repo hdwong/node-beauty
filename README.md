@@ -2,7 +2,7 @@
 
 [![npm package](https://nodei.co/npm/node-beauty.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-beauty/)
 
-> 我是来自中国的码农 Bun，该模块已被用于多个在线项目中，旨为构建基于 REST Service 的网站或 APP 提供可复用的服务端模块。
+> 我是来自中国的码农 Bun，该模块已被用于多个在线项目中，旨为构建基于 REST Service 的网站或应用提供可复用的服务端模块。
 >
 > -- 2016.6.1
 
@@ -119,3 +119,4 @@ redis: {
 ## 作者信息
 * Name: Bun Wong
 * Email: bunwong@qq.com
+

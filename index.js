@@ -6,7 +6,7 @@ module.exports = {
   },
   start: (next) => {
     options.config = options.config || 'etc/config.js';
-    options.syspath = options.syspath || 'sys';
+    options.path = options.path || 'sys';
     server = require('./lib/core.js')(options, services, next);
   },
   use: (serviceName, instance) => services[serviceName] = instance || null
