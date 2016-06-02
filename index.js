@@ -5,9 +5,9 @@ module.exports = {
     options = o;
   },
   start: () => {
-    let config = options.config || 'etc/config.js',
-        sysPath = options.syspath || 'sys';
-    server = require('./lib/core.js')(config, sysPath, services);
+    options.config = options.config || 'etc/config.js';
+    options.syspath = options.syspath || 'sys';
+    server = require('./lib/core.js')(options, services);
   },
   use: (serviceName, instance) => services[serviceName] = instance || null,
   close: () => server.close()
