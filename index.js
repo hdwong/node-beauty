@@ -4,11 +4,10 @@ module.exports = {
   init: (o) => {
     options = o;
   },
-  start: () => {
+  start: (next) => {
     options.config = options.config || 'etc/config.js';
     options.syspath = options.syspath || 'sys';
-    server = require('./lib/core.js')(options, services);
+    server = require('./lib/core.js')(options, services, next);
   },
-  use: (serviceName, instance) => services[serviceName] = instance || null,
-  close: () => server.close()
+  use: (serviceName, instance) => services[serviceName] = instance || null
 };
