@@ -109,7 +109,7 @@ redis: {
 
 ## 启动
 
-启动 Beauty 需三部
+启动 Beauty 需三个步骤
 
 ### 初始化
 
@@ -144,17 +144,17 @@ server.start((server) => {
 
 ## 安装服务模块
 
-Beauty 通过 server.use 来安装服务模块，原型：
+Beauty 通过 `server.use` 来安装服务模块，原型：
 
 ```
-server.use( [模块名称], [服务对象] );
+server.use( [服务模块名称], [服务对象] );
 ```
 
 Beauty 提供三种服务模块的安装方式
 
 ### node-beauty-* 模块
 
-Beauty 提供了一些常用的基础服务模块
+Beauty 提供了一些常用的基础服务模块，做好配置后加载即能使用
 
 - [node-beauty-mysql](https://www.npmjs.com/package/node-beauty-mysql) - MySQL 数据库服务模块
 - [node-beauty-redis](https://www.npmjs.com/package/node-beauty-redis) - Redis 缓存服务模块
@@ -193,7 +193,15 @@ server.use('test', {
 
 ## 使用
 
-客户端可通过 `config.server` 中设置的主机和端口号访问 API，并设置好相符的 `request.headers.token` 即可，推荐使用 [Postman](https://www.getpostman.com/) 进行 API 调试
+客户端可通过 `config.server` 中设置的主机和端口号访问 API，并设置好相符的 `request.headers.token` 即可，
+
+服务接口路径为 `http://[hostname]:[port]/[服务模块名称]/[服务方法]`
+
+    $ curl --header token:abcd1234 --get http://127.0.0.1:1108/test
+    
+    {"code":1,"result":"Hello world"}
+
+推荐使用 [Postman](https://www.getpostman.com/) 进行服务接口调试
 
 ![Postman](http://www.hdwong.com/wp-content/uploads/2016/06/postman.jpg)
 
