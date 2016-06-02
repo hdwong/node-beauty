@@ -18,20 +18,23 @@ server.init({
   config: 'config.js',
   syspath: 'sys'
 });
-server.use('mysql', require('./node-beauty-mysql'));
-server.use('redis', require('./node-beauty-redis'));
+server.use('mysql', require('node-beauty-mysql'));
+server.use('redis', require('node-beauty-redis'));
 // server.use('some-service');
+server.use('test', {
+  get_default: (req, res, next) => next('Hello world')
+});
 server.start();
 ```
 ## 目录
 
 最新最详细的文档，可以到 http://beauty.hdwong.com/ 查阅。
 
-- [安装](#install)
-- [配置](#config)
-- [启动](#start)
-- [安装服务模块](#use-service)
-- [自定义服务模块](#dev-service)
+- [安装](#安装)
+- [配置](#配置)
+- [启动](#启动)
+- [安装服务模块](#安装服务模块)
+- [自定义服务模块](#自定义服务模块)
 
 ## 安装
 
