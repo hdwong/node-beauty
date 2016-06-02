@@ -34,9 +34,9 @@ server.start();
 
 - [安装](#安装)
 - [配置](#配置)
-  - [config.app](#config.app)
-  - [config.server](#config.server)
-  - [config.service](#config.service)
+  - [config.app](#configapp)
+  - [config.server](#configserver)
+  - [config.service](#configservice)
 - [启动](#启动)
 - [安装服务模块](#安装服务模块)
 - [自定义服务模块](#自定义服务模块)
