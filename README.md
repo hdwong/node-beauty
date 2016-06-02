@@ -30,16 +30,13 @@ server.start();
 
 ## 目录
 
-最新最详细的文档，可以到 http://beauty.hdwong.com/ 查阅。
-
 - [安装](#安装)
 - [配置](#配置)
-  - [config.app](#configapp)
-  - [config.server](#configserver)
-  - [config.service](#configservice)
 - [启动](#启动)
 - [安装服务模块](#安装服务模块)
+- [使用](#使用)
 - [自定义服务模块](#自定义服务模块)
+
 
 ## 安装
 
@@ -80,13 +77,13 @@ module.exports = {
 - `daemonize` - 是否开启后台运行模式，默认 `false`
 - `worker_processes` - 子进程数量，默认为 cpu 内核数
 - `pid` - PID 文件目录，默认为程序当前目录
-- `log4js` - 是否使用 [log4js](https://www.npmjs.com/package/log4js) 日志模块，如果使用，此选项传入 log4js 模块的 JSON 配置文件路径，默认为程序当前目录下的 log4js.json；传入 `false` 则使用控制台 `console.log` 作为日志输出
+- `log4js` - 是否使用 [log4js](https://www.npmjs.com/package/log4js) 日志模块，如果使用，此选项传入 log4js 模块的 JSON 配置文件路径，默认为程序当前目录下的 /log4js.json；传入 `false` 则使用控制台 `console.log` 作为日志输出
 
 ### config.server
 
 - `name` - 服务器名称，默认 "Beauty Restful API Server"
 - `version` - 服务版本，默认 "1.0.0"
-- `token` - 服务请求时 `req.headers` 需带上相符的 token 字符串，该选项必须设置，必须为字符串且不能为空串 ""
+- `token` - 服务请求时 `request.headers.token` 需带上相符的 token 字符串，该选项必须设置，必须为字符串且不能为空串 ""
 - `ip_list` - 白名单 IP 数组，客户请求的来源 IP 必须在列表内，若该数组为空时不作来源 IP 检查，默认为空数组 `[]`，
 
 ### config.service
@@ -112,11 +109,110 @@ redis: {
 
 ## 启动
 
+启动 Beauty 需三部
+
+### 初始化
+
+```js
+// app.js
+var server = require('node-beauty');
+server.init({
+  config: 'config.js',
+  path: 'sys'
+});
+```
+
+`server.init` 方法接受 `options` 作为参数
+
+- `config` - 配置文件路径，默认为程序当前目录下的 /config.js
+- `path` - 自定义服务模块的加载路径，默认为程序当前目录下的 /sys 目录
+
+### 安装服务模块
+
+`server.use` 方法详见 [安装服务模块](#安装服务模块)
+
+### 开启 restify 服务器
+
+```js
+// app.js
+server.start((server) => {
+  // do something
+});
+```
+
+`server.start` 方法接受一个回调函数，返回启动后的 restify 服务器实例，以实现对 restify 的控制
+
 ## 安装服务模块
+
+Beauty 通过 server.use 来安装服务模块，原型：
+
+```
+server.use( [模块名称], [服务对象] );
+```
+
+Beauty 提供三种服务模块的安装方式
+
+### node-beauty-* 模块
+
+Beauty 提供了一些常用的基础服务模块
+
+- [node-beauty-mysql](https://www.npmjs.com/package/node-beauty-mysql) - MySQL 数据库服务模块
+- [node-beauty-redis](https://www.npmjs.com/package/node-beauty-redis) - Redis 缓存服务模块
+- [node-beauty-mongodb](https://www.npmjs.com/package/node-beauty-mongodb) - MongoDB 对象存储服务模块
+- [node-beauty-upyun](https://www.npmjs.com/package/node-beauty-upyun) - UPYun 存储服务模块，服务提供商见 https://www.upyun.com/
+- [node-beauty-qiniu](https://www.npmjs.com/package/node-beauty-qiniu) - Qiniu 存储服务模块，服务提供商见 http://www.qiniu.com/
+- [node-beauty-solr](https://www.npmjs.com/package/node-beauty-solr) - Solr 全文检索服务模块
+- [node-beauty-location](https://www.npmjs.com/package/node-beauty-location) - Location GEO-IP 地理信息查询服务模块
+
+```js
+// app.js
+server.use('db', require('node-beauty-mysql'));
+```
+
+### 文件加载
+
+当服务对象参数为空时，Beauty 会自动查找 `options.path` 服务模块目录下是否存在与模块名称同名的 js 文件并加载
+
+```js
+// app.js
+server.use('your-own-service');
+```
+
+上述例子中，Beauty 会查找 /sys/your-own-service.js 并加载，若失败则提示异常
+
+自定义服务模块的开发详见 [自定义服务模块](#自定义服务模块)
+
+### 内联对象
+
+```js
+// app.js
+server.use('test', {
+  get_default: (req, res, next) => next('Hello world')
+});
+```
+
+## 使用
+
+客户端可通过 `config.server` 中设置的主机和端口号访问 API，并设置好相符的 `request.headers.token` 即可，推荐使用 [Postman](https://www.getpostman.com/) 进行 API 调试
+
+![Postman](http://www.hdwong.com/wp-content/uploads/2016/06/postman.jpg)
+
+### 返回值
+
+`response.statusCode` 反映当前接口的响应状态，该状态符合 HTTP 约定，则 200 为成功，否则为失败
+
+返回值为 JSON 格式的对象，且总会包含 `code`，也可代表不同响应状态
+- `1` - 成功
+- `0` - 服务模块异常
+- `-1` - 服务器异常
+
+成功时，`result` 会返回结果
+
+失败时，`message` 会返回错误信息
 
 ## 自定义服务模块
 
 ## 作者信息
 * Name: Bun Wong
 * Email: bunwong@qq.com
-
+* Blog: http://www.hdwong.com/
