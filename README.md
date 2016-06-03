@@ -220,6 +220,8 @@ server.use('test', {
 
 ## 自定义服务模块
 
+详细 API 文档请查阅 http://www.hdwong.com/node-beauty
+
 ## 作者信息
 * Name: Bun Wong
 * Email: bunwong@qq.com
