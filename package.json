@@ -1,6 +1,6 @@
 {
   "name": "node-beauty",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Beauty service framework",
   "private": false,
   "main": "index.js",
