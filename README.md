@@ -40,11 +40,11 @@ server.start();
   - [PHP (php-azalea)](#php)
   - [Node.js (node-azalea)](#nodejs)
 
-<h2 id="install">安装</h2>
+<h2 name="install">安装</h2>
 
     $ npm install node-beauty
 
-<h2 id="configure">配置</h2>
+<h2 name="configure">配置</h2>
 
 Beauty 需要准备一个配置文件，并返回一个配置对象，例子：
 
@@ -109,7 +109,7 @@ redis: {
 }
 ```
 
-<h2 id="start">启动</h2>
+<h2 name="start">启动</h2>
 
 启动 Beauty 需三个步骤
 
@@ -144,7 +144,7 @@ server.start((server) => {
 
 `server.start` 方法接受一个回调函数，返回启动后的 restify 服务器实例，以实现对 restify 的控制
 
-<h2 id="use-module">安装服务模块</h2>
+<h2 name="use-module">安装服务模块</h2>
 
 Beauty 通过 `server.use` 来安装服务模块，原型：
 
@@ -194,7 +194,7 @@ server.use('test', {
 });
 ```
 
-<h2 id="access">使用</h2>
+<h2 name="access">使用</h2>
 
 客户端可通过 `config.server` 中设置的主机和端口号访问 API，并设置好相符的 `request.headers.token` 即可，
 
@@ -221,17 +221,17 @@ server.use('test', {
 
 失败时，`message` 会返回错误信息
 
-<h2 id="custom-module">自定义服务模块</h2>
+<h2 name="custom-module">自定义服务模块</h2>
 
 详细 API 文档请查阅 http://www.hdwong.com/node-beauty
 
-<h2 id="client-sdk">客户端 SDK</h2>
+<h2 name="client-sdk">客户端 SDK</h2>
 
-<h3 id="php">PHP (php-azalea)</h3>
+<h3 name="php">PHP (php-azalea)</h3>
 
 PHP 客户端 SDK 请查阅 https://www.npmjs.com/package/php-azalea
 
-<h3 id="nodejs">Node.js (node-azalea)</h3>
+<h3 name="nodejs">Node.js (node-azalea)</h3>
 
 Node.js 客户端 SDK 请查阅 https://www.npmjs.com/package/node-azalea
 
