@@ -30,19 +30,21 @@ server.start();
 
 ## 目录
 
-- [安装](#安装)
-- [配置](#配置)
-- [启动](#启动)
-- [安装服务模块](#安装服务模块)
-- [使用](#使用)
-- [自定义服务模块](#自定义服务模块)
+- [安装](#install)
+- [配置](#configure)
+- [启动](#start)
+- [安装服务模块](#use-module)
+- [使用](#access)
+- [自定义服务模块](#custom-module)
+- [客户端 SDK](#client-sdk)
+  - [PHP](#php)
+  - [Node.js](#nodejs)
 
-
-## 安装
+<h2 name="install">安装</h2>
 
     $ npm install node-beauty
 
-## 配置
+<h2 name="configure">配置</h2>
 
 Beauty 需要准备一个配置文件，并返回一个配置对象，例子：
 
@@ -107,7 +109,7 @@ redis: {
 }
 ```
 
-## 启动
+<h2 name="start">启动</h2>
 
 启动 Beauty 需三个步骤
 
@@ -142,7 +144,7 @@ server.start((server) => {
 
 `server.start` 方法接受一个回调函数，返回启动后的 restify 服务器实例，以实现对 restify 的控制
 
-## 安装服务模块
+<h2 name="use-module">安装服务模块</h2>
 
 Beauty 通过 `server.use` 来安装服务模块，原型：
 
@@ -159,6 +161,7 @@ Beauty 提供了一些常用的基础服务模块，做好配置后加载即能�
 - [node-beauty-mysql](https://www.npmjs.com/package/node-beauty-mysql) - MySQL 数据库服务模块
 - [node-beauty-redis](https://www.npmjs.com/package/node-beauty-redis) - Redis 缓存服务模块
 - [node-beauty-mongodb](https://www.npmjs.com/package/node-beauty-mongodb) - MongoDB 对象存储服务模块
+- [node-beauty-email](https://www.npmjs.com/package/node-beauty-email) - Email 电子邮件发送服务模块
 - [node-beauty-upyun](https://www.npmjs.com/package/node-beauty-upyun) - UPYun 存储服务模块，服务提供商见 https://www.upyun.com/
 - [node-beauty-qiniu](https://www.npmjs.com/package/node-beauty-qiniu) - Qiniu 存储服务模块，服务提供商见 http://www.qiniu.com/
 - [node-beauty-solr](https://www.npmjs.com/package/node-beauty-solr) - Solr 全文检索服务模块
@@ -191,7 +194,7 @@ server.use('test', {
 });
 ```
 
-## 使用
+<h2 name="access">使用</h2>
 
 客户端可通过 `config.server` 中设置的主机和端口号访问 API，并设置好相符的 `request.headers.token` 即可，
 
@@ -218,9 +221,20 @@ server.use('test', {
 
 失败时，`message` 会返回错误信息
 
-## 自定义服务模块
+<h2 name="custom-module">自定义服务模块</h2>
 
 详细 API 文档请查阅 http://www.hdwong.com/node-beauty
+
+<h2 name="client-sdk">客户端 SDK</h2>
+
+<h3 name="php">PHP</h3>
+
+PHP 客户端 SDK 请查阅 [php-azalea](https://www.npmjs.com/package/php-azalea)
+
+<h3 name="nodejs">Node.js</h3>
+
+Node.js 客户端 SDK 请查阅 [node-azalea](https://www.npmjs.com/package/node-azalea)
+
 
 ## 作者信息
 * Name: Bun Wong
