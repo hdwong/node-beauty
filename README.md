@@ -25,7 +25,12 @@ server.use('redis', require('node-beauty-redis'));
 server.use('test', {
   get_default: (req, res, next) => next('Hello world')
 });
-server.start();
+server.start((core, restify) => {
+  // do something 
+  restify.pre((req, res, next) => {
+    // handler on request
+  });
+});
 ```
 
 ## 目录
@@ -137,7 +142,9 @@ server.init({
 
 ```js
 // app.js
-server.start((server) => {
+server.start((core, server) => {
+  // core - the CORE class, see http://www.hdwong.com/node-beauty
+  // server - restify server instance, see http://restify.com/
   // do something
 });
 ```
