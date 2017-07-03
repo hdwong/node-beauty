@@ -1,6 +1,6 @@
 {
   "name": "node-beauty",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Beauty service framework",
   "private": false,
   "main": "index.js",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "restify": "*",
+    "restify-errors": "*",
     "lodash": "*"
   },
   "keywords": [
